@@ -25,21 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "bluetooth2";
 
     SeekBar seekBar;
-    TextView txtBack;
+    //TextView txtBack;
     Button btnOn,btnOff;
     Handler h;
 
     final int RECEIVE_MESSAGE = 1; //status for handler
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
-    private StringBuilder sb = new StringBuilder();
+   // private StringBuilder sb = new StringBuilder();
 
     private ConnectedThread mConnectedThread;
 
     // SPP UUID service
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // MAC-address of Bluetooth module (**CHANGE THIS**)
+    // MAC-address of Bluetooth module (**CHANGE THIS, discover using AT command with serial port in comp**)
     private static String address = "00:15:FF:F2:19:5F";
 
 
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setKeyProgressIncrement(1);
 
 
-       /* txtComp = (TextView) findViewById(R.id.txtComp);      // RECEIVE MESSAGE
+       /* txtComp = (TextView) findViewById(R.id.txtComp);      // RECEIVE MESSAGE, current version is write only
 
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
         btnOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btnOn.setEnabled(false);
-                mConnectedThread.write("50");    // Send "1" via Bluetooth
-                seekBar.setProgress(50);
+                mConnectedThread.write("50");    // Send "50" via Bluetooth
+                seekBar.setProgress(50);        //agree with seekbar
                 //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
             }
         });
