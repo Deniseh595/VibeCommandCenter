@@ -1,3 +1,3 @@
 # VibeCommandCenter
 
-Android App for Vibe Van control
+Android App for Vibe Van control :)
