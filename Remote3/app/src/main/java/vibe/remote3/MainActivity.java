@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     SeekBar seekBar;
     TextView txtBack;
+    Button btnOn,btnOff;
     Handler h;
 
     final int RECEIVE_MESSAGE = 1; //status for handler
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private static String address = "00:15:FF:F2:19:5F";
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         seekBar = (SeekBar) findViewById(R.id.simpleSeekBar);
+        btnOn = (Button) findViewById(R.id.btnOn);                  // button LED ON
+        btnOff = (Button) findViewById(R.id.btnOff);
         seekBar.setMax(100);
         seekBar.setKeyProgressIncrement(1);
 
@@ -81,13 +87,29 @@ public class MainActivity extends AppCompatActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
+        btnOn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                btnOn.setEnabled(false);
+                mConnectedThread.write("50");    // Send "1" via Bluetooth
+                seekBar.setProgress(50);
+                //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnOff.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                btnOff.setEnabled(false);
+                mConnectedThread.write("0");    // Send "0" via Bluetooth
+                seekBar.setProgress(0);
+                //Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            int brightness = 0;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //too much
-                brightness = progress; 
+                //too much data if we write here
             }
 
             @Override
@@ -97,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mConnectedThread.write(brightness);
+                String strI = Integer.toString(seekBar.getProgress());
+                mConnectedThread.write(strI);
             }
         });
 
@@ -229,10 +252,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //SEND DATA FN
-        public void write(int message) {
+        public void write(String message) {
             Log.d(TAG, "...Data to send: " + message + "...");
+            byte[] msgBuffer = message.getBytes();
             try {
-                mmOutStream.write(message);
+                mmOutStream.write(msgBuffer);
             } catch (IOException e) {
                 Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
             }
