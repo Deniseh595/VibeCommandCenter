@@ -1,3 +1,3 @@
 # VibeCommandCenter
 
-Android App for A/V ctrl 
+Android App for A/V control 
