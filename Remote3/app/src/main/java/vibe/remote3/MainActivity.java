@@ -86,9 +86,8 @@ public class MainActivity extends AppCompatActivity {
             int brightness = 0;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                brightness = progress;
-                mConnectedThread.write(brightness);
-
+                //too much
+                brightness = progress; 
             }
 
             @Override
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //can update after level is set if onprogress doesn't work
+                mConnectedThread.write(brightness);
             }
         });
 
