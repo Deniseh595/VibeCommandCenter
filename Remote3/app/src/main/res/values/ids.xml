@@ -3,4 +3,5 @@
     <item name="simpleSeekBar" type="id" />
     <item name="btnOn" type="id" />
     <item name="btnOff" type="id" />
+    <item name="play" type="id" />
 </resources>

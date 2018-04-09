@@ -1,11 +1,17 @@
 package vibe.remote3;
 
+import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     SeekBar seekBar;
     //TextView txtBack;
-    Button btnOn,btnOff;
+    Button btnOn,btnOff,play;
     Handler h;
 
     final int RECEIVE_MESSAGE = 1; //status for handler
@@ -53,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
         seekBar = (SeekBar) findViewById(R.id.simpleSeekBar);
         btnOn = (Button) findViewById(R.id.btnOn);                  // button LED ON
         btnOff = (Button) findViewById(R.id.btnOff);
+        play = (Button) findViewById(R.id.play);
         seekBar.setMax(100);
         seekBar.setKeyProgressIncrement(1);
+
 
 
        /* txtComp = (TextView) findViewById(R.id.txtComp);      // RECEIVE MESSAGE, current version is write only
@@ -86,6 +94,16 @@ public class MainActivity extends AppCompatActivity {
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
+
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSpotify();
+            }
+        });
+
+
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -124,6 +142,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void startSpotify(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
+        intent.setComponent(new ComponentName("com.spotify.mobile.android.ui", "com.spotify.mobile.android.ui.Launcher"));
+        intent.putExtra(SearchManager.QUERY, "michael jackson smooth criminal");
     }
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {

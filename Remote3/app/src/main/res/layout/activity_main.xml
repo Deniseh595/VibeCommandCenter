@@ -11,7 +11,8 @@
         android:layout_height="32dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="LED Test "
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/title"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -55,8 +56,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:layout_marginStart="365dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginStart="364dp"
+        android:layout_marginTop="50dp"
         android:text="@string/slider"
         android:textAppearance="@android:style/TextAppearance.Holo"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,8 +67,16 @@
         android:layout_width="400dp"
         android:layout_height="50dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/play"
+        android:layout_width="83dp"
+        android:layout_height="81dp"
+        android:background="@drawable/Spotify_Icon_RGB_White"
+        tools:layout_editor_absoluteX="359dp"
+        tools:layout_editor_absoluteY="946dp" />
 
 </android.support.constraint.ConstraintLayout>

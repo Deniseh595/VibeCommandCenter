@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Remote3</string>
+    <string name="title">A/V Test</string>
     <string name= "slider">Set Mood</string>
     <string name= "button_on">Lights On</string>
     <string name= "button_off">Lights Off</string>
+    <string name= "play_music">Play Music</string>
 </resources>
