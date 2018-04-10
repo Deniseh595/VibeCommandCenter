@@ -4,4 +4,5 @@
     <item name="btnOn" type="id" />
     <item name="btnOff" type="id" />
     <item name="play" type="id" />
+    <item name="txtComp" type="id" />
 </resources>

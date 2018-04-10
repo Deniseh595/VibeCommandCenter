@@ -1,5 +1,6 @@
 package vibe.remote3;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,103 +28,68 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private static final String TAG = "bluetooth2";
 
-    SeekBar seekBar;
-    //TextView txtBack;
-    Button btnOn,btnOff,play;
-    Handler h;
+    //SeekBar seekBar;
+    Button btnOn,btnOff;
 
-    final int RECEIVE_MESSAGE = 1; //status for handler
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
-   // private StringBuilder sb = new StringBuilder();
+    private OutputStream outStream = null;
 
-    private ConnectedThread mConnectedThread;
 
     // SPP UUID service
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // MAC-address of Bluetooth module (**CHANGE THIS, discover using AT command with serial port in comp**)
-    private static String address = "00:15:FF:F2:19:5F";
+    private static String address = "98:D3:32:20:C8:7A";
 
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        seekBar = (SeekBar) findViewById(R.id.simpleSeekBar);
+        //seekBar = (SeekBar) findViewById(R.id.simpleSeekBar);
         btnOn = (Button) findViewById(R.id.btnOn);                  // button LED ON
         btnOff = (Button) findViewById(R.id.btnOff);
-        play = (Button) findViewById(R.id.play);
-        seekBar.setMax(100);
-        seekBar.setKeyProgressIncrement(1);
-
-
-
-       /* txtComp = (TextView) findViewById(R.id.txtComp);      // RECEIVE MESSAGE, current version is write only
-
-        h = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case RECEIVE_MESSAGE:                                                   // if receive message
-                        byte[] readBuf = (byte[]) msg.obj;
-                        String strIncom = new String(readBuf, 0, msg.arg1);                 // create string from bytes array
-                        sb.append(strIncom);                                                // append string
-                        int endOfLineIndex = sb.indexOf("\r\n");                            // determine the end-of-line
-                        if (endOfLineIndex > 0) {                                            // if end-of-line,
-                            String sbprint = sb.substring(0, endOfLineIndex);               // extract string
-                            sb.delete(0, sb.length());                                      // and clear
-                            txtComp.setText("Data from Computer: " + sbprint);            // update TextView
-                            //OR DO SOMETHING WITH DATA
-
-                            seekBar.setEnabled(true);
-
-                        }
-                        //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
-                        break;
-                }
-            }
-
-            ;
-        }; */
+       // play = (Button) findViewById(R.id.play);
+       // seekBar.setMax(100);
+       // seekBar.setKeyProgressIncrement(1);
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
 
-        play.setOnClickListener(new View.OnClickListener() {
+        /*play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startSpotify();
             }
-        });
-
+        });*/
 
 
         btnOn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                btnOn.setEnabled(false);
-                mConnectedThread.write("50");    // Send "50" via Bluetooth
-                seekBar.setProgress(50);        //agree with seekbar
+                //btnOn.setEnabled(false);
+                sendData("100");    // Send "100" via Bluetooth
+                //seekBar.setProgress(100);        //agree with seekbar
                 //Toast.makeText(getBaseContext(), "Turn on LED", Toast.LENGTH_SHORT).show();
             }
         });
 
         btnOff.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                btnOff.setEnabled(false);
-                mConnectedThread.write("0");    // Send "0" via Bluetooth
-                seekBar.setProgress(0);
+               // btnOff.setEnabled(false);
+                sendData("0");    // Send "0" via Bluetooth
+               // seekBar.setProgress(0);
                 //Toast.makeText(getBaseContext(), "Turn off LED", Toast.LENGTH_SHORT).show();
             }
         });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      /*  seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -140,19 +106,18 @@ public class MainActivity extends AppCompatActivity {
                 String strI = Integer.toString(seekBar.getProgress());
                 mConnectedThread.write(strI);
             }
-        });
+        }); */
 
     }
 
-    private void startSpotify(){
+   /* private void startSpotify(){
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setAction(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH);
         intent.setComponent(new ComponentName("com.spotify.mobile.android.ui", "com.spotify.mobile.android.ui.Launcher"));
-        intent.putExtra(SearchManager.QUERY, "michael jackson smooth criminal");
-    }
+    }*/
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 10) {
             try {
                 final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[]{UUID.class});
                 return (BluetoothSocket) m.invoke(device, MY_UUID);
@@ -202,8 +167,12 @@ public class MainActivity extends AppCompatActivity {
         // Create a data stream so we can talk to server.
         Log.d(TAG, "...Create Socket...");
 
-        mConnectedThread = new ConnectedThread(btSocket);
-        mConnectedThread.start();
+        try {
+            outStream = btSocket.getOutputStream();
+        }
+        catch (IOException e){
+            errorExit("Fatal Error", "In onResume() and output stream creation failed:" + e.getMessage() + ".");
+        }
     }
 
     @Override
@@ -211,6 +180,13 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         Log.d(TAG, "...In onPause()...");
+        if (outStream != null) {
+            try {
+                outStream.flush();
+            } catch (IOException e) {
+                errorExit("Fatal Error", "In onPause() and failed to flush output stream: " + e.getMessage() + ".");
+            }
+        }
 
         try {
             btSocket.close();
@@ -223,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         // Check for Bluetooth support and then check to make sure it is turned on
         // Emulator doesn't support Bluetooth and will return null
         if (btAdapter == null) {
-            errorExit("Fatal Error", "Bluetooth not support");
+            errorExit("Fatal Error", "Bluetooth not supported");
         } else {
             if (btAdapter.isEnabled()) {
                 Log.d(TAG, "...Bluetooth ON...");
@@ -240,51 +216,14 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private class ConnectedThread extends Thread {
-        private final InputStream mmInStream;
-        private final OutputStream mmOutStream;
 
-        public ConnectedThread(BluetoothSocket socket) {
-            InputStream tmpIn = null;
-            OutputStream tmpOut = null;
-
-            // Get the input and output streams, using temp objects because
-            // member streams are final
-            try {
-                tmpIn = socket.getInputStream();
-                tmpOut = socket.getOutputStream();
-            } catch (IOException e) {
-            }
-
-            mmInStream = tmpIn;
-            mmOutStream = tmpOut;
-        }
-
-        public void run() {
-            byte[] buffer = new byte[256];  // buffer store for the stream
-            int bytes; // bytes returned from read()
-
-            // Keep listening to the InputStream until an exception occurs
-            while (true) {
-                try {
-                    // Read from the InputStream
-                    bytes = mmInStream.read(buffer);        // Get number of bytes and message in "buffer"
-                    h.obtainMessage(RECEIVE_MESSAGE, bytes, -1, buffer).sendToTarget();     // Send to message queue Handler
-                } catch (IOException e) {
-                    break;
-                }
-            }
-        }
-
-        //SEND DATA FN
-        public void write(String message) {
+    private void sendData(String message) {
             Log.d(TAG, "...Data to send: " + message + "...");
             byte[] msgBuffer = message.getBytes();
             try {
-                mmOutStream.write(msgBuffer);
+              outStream.write(msgBuffer);
             } catch (IOException e) {
                 Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
             }
         }
-    }
 }

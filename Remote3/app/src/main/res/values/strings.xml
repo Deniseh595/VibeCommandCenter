@@ -5,4 +5,6 @@
     <string name= "button_on">Lights On</string>
     <string name= "button_off">Lights Off</string>
     <string name= "play_music">Play Music</string>
+    <string name= "logo">Logo</string>
+
 </resources>
