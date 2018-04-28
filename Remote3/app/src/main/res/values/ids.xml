@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="simpleSeekBar" type="id" />
-    <item name="btnOn" type="id" />
-    <item name="btnOff" type="id" />
-    <item name="play" type="id" />
-    <item name="txtComp" type="id" />
-</resources>

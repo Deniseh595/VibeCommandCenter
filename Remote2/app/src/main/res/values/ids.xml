@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="readBuffer" type="id">readBuffer</item>
+    <item name="discover" type="id">discover</item>
+    <item name="PairedBtn" type="id">pairedBtn</item>
+    <item name="LEDon" type="id">LEDon</item>
+    <item name="LEDoff" type="id">LEDoff</item>
+    <item name="devicesListView" type="id">devicelist</item>
+    <item name="scan" type="id">btOn</item>
+</resources>

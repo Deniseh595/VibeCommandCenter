@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Remote2</string>
+    <string name="bt_enabled">Bluetooth enabled</string>
+    <string name="enabled">Enabled</string>
+    <string name="Disabled">Disabled</string>
+    <string name="bt_disabled">Bluetooth Disabled</string>
+    <string name="on_light">Lights On</string>
+    <string name="off_light">Lights Off</string>
+    <string name="rx">RX</string>
+    <string name="lt_read_buffer"><![CDATA[<Read Buffer>]]></string>
+    <string name="lt_bluetooth_status"><![CDATA[<Bluetooth Status>]]></string>
+    <string name="bt_not_found">Status: Bluetooth not found</string>
+    <string name="hc_module">HC-05</string>
+    <string name="connecting">Connecting...</string>
+    <string name="on_matrix">Matrix On</string>
+    <string name="off_matrix">Matrix Off</string>
+</resources>
