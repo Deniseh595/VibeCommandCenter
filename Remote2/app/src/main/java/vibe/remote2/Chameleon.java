@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +23,11 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 
 public class Chameleon extends Activity {
+
+    //Control strings
+    private final String MATRIXON = "1";
+    private final String MATRIXOFF = "0";
+
 
     // GUI Components
     private TextView mBluetoothStatus;
@@ -54,12 +57,12 @@ public class Chameleon extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"IN ONCREATE...");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chameleon);
 
         mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
-        mLEDon = (Button)findViewById(R.id.LEDon);
-        mLEDoff = (Button)findViewById(R.id.LEDoff);
+        mLEDon = (Button)findViewById(R.id.matrixon);
+        mLEDoff = (Button)findViewById(R.id.matrixoff);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
 
@@ -96,7 +99,7 @@ public class Chameleon extends Activity {
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write("1");
+                        mConnectedThread.write(MATRIXON);
                 }
             });
 
@@ -105,7 +108,7 @@ public class Chameleon extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (mConnectedThread != null)
-                        mConnectedThread.write("0");
+                        mConnectedThread.write(MATRIXOFF);
                 }
             });
 

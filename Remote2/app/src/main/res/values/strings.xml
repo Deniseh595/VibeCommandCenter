@@ -14,4 +14,9 @@
     <string name="connecting">Connecting...</string>
     <string name="on_matrix">Matrix On</string>
     <string name="off_matrix">Matrix Off</string>
+    <string name="new_name">Remote</string>
+    <string name="cabin_control">Cabin Lights   </string>
+    <string name="status">Status:</string>
+    <string name="logo_header">Vibe logo header</string>
+    <string name="lighting">Mood Lighting</string>
 </resources>

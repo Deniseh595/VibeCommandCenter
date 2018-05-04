@@ -5,17 +5,26 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.Toast;
+
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +35,13 @@ import java.util.UUID;
 
 public class LEDControl extends Activity {
 
+    //Control variables
+    private final String LEDON="111111";
+    private final String LEDOFF = "0";
+
     // GUI Components
-    private TextView mBluetoothStatus;
-    private TextView mReadBuffer;
     private BluetoothAdapter mBTAdapter;
-    private ListView mDevicesListView;
-    private Button mLEDon;
-    private Button mLEDoff;
+    private Switch neopixel;
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
@@ -53,17 +62,17 @@ public class LEDControl extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"IN ONCREATE...");
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_led);
 
-        mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
-        mReadBuffer = (TextView) findViewById(R.id.readBuffer);
-        mLEDon = (Button)findViewById(R.id.LEDon);
-        mLEDoff = (Button)findViewById(R.id.LEDoff);
+
+        neopixel = (Switch) findViewById(R.id.switch_neopixel);
+
+
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
-
-
 
 
 
@@ -76,42 +85,35 @@ public class LEDControl extends Activity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mReadBuffer.setText(readMessage);
+                    // mReadBuffer.setText(readMessage);
                 }
 
                 if(msg.what == CONNECTING_STATUS){
-                    if(msg.arg1 == 1)
-                        mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-                    else
-                        mBluetoothStatus.setText("Connection Failed");
+                    if(msg.arg1 == 1){}
+                       // mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+                    else {}
+                    Toast.makeText(getApplicationContext(),"connection failed",Toast.LENGTH_SHORT).show();
+                    // mBluetoothStatus.setText("Connection Failed");
                 }
             }
         };
 
         if (mBTAdapter == null) {
             // Device does not support Bluetooth
-            mBluetoothStatus.setText(R.string.bt_not_found);
+           // mBluetoothStatus.setText(R.string.bt_not_found);
             Log.d(TAG, "BT device not found...");
         }
         else {
-
-            mLEDon.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write("111111");
-                }
-            });
-
-            mLEDoff.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    if (mConnectedThread != null)
-                        mConnectedThread.write("0");
-                }
-            });
-
+             neopixel.setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isChecked) {
+                                mConnectedThread.write(LEDON);
+                            } else {
+                                mConnectedThread.write(LEDOFF);
+                            }
+                        }
+                    });
         }
 
     }
@@ -153,7 +155,7 @@ public class LEDControl extends Activity {
             //Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             //startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             mBTAdapter.enable();
-            mBluetoothStatus.setText(R.string.bt_enabled);
+           // mBluetoothStatus.setText(R.string.bt_enabled);
             Log.d(TAG, "Bluetooth enabled..");
         }
         else{
@@ -166,7 +168,7 @@ public class LEDControl extends Activity {
     private void bluetoothOff(){
         Log.d(TAG,"..IN BT OFF..");
         mBTAdapter.disable(); // turn off
-        mBluetoothStatus.setText(R.string.bt_disabled);
+       // mBluetoothStatus.setText(R.string.bt_disabled);
         Log.d(TAG, "BT not on...");
     }
 
@@ -179,7 +181,7 @@ public class LEDControl extends Activity {
                 return;
             }
 
-            mBluetoothStatus.setText(R.string.connecting);
+          //  mBluetoothStatus.setText(R.string.connecting);
 
             new Thread()
             {

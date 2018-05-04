@@ -6,13 +6,14 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="Remote2Theme" parent="Theme.AppCompat.NoActionBar" >
         <item name="android:windowBackground">@color/colorBackground</item>
-
-
-
+        <item name = "android:colorBackground">@color/colorBackground</item>
+        <item name = "android:textColorPrimary">@color/font_color</item>
+        <item name = "android:fontFamily">@font/work_sans_semibold</item>
 
     </style>
 

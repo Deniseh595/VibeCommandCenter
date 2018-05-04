@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorBackground">#303030</color>
-    <color name="accent_material_dark">#3d2fb2</color>
+    <color name="colorBackground">#F5F5F0</color>
+    <color name="accent_material_dark" tools:ignore="PrivateResource">#3d2fb2</color>
+    <color name="background_material_dark">#f5f5f0</color>
+    <color name ="font_color">#001213</color>
+    <color name ="switchtracknormal">#E4E3EB</color>
+    <color name = "switchtrackdisable">#E4E3EB</color>
+    <color name = "switchtrackactive">#3C2BBC</color>
+
 </resources>

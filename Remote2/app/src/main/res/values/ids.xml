@@ -7,4 +7,5 @@
     <item name="LEDoff" type="id">LEDoff</item>
     <item name="devicesListView" type="id">devicelist</item>
     <item name="scan" type="id">btOn</item>
+    <item name="switch_neopixel" type="id">neopixel</item>
 </resources>

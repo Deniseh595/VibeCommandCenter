@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@drawable/dialog_soft"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="vibe.remote2.LEDControl">
+
+
+    <LinearLayout
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        android:layout_centerInParent="true"
+        android:hapticFeedbackEnabled="true"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/logo_header"
+            android:layout_width="207dp"
+            android:layout_height="54dp"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/logo_header"
+            android:src="@drawable/ic_vibe3" />
+
+        <TextView
+            android:id="@+id/cabin_lighting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/lighting"
+            android:textColor="@color/font_color"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Switch
+                android:id="@id/switch_neopixel"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:showText="false"
+                android:switchMinWidth="56dp"
+                android:switchPadding="20dp"
+                android:switchTextAppearance="@style/TextAppearance.AppCompat"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/light_switch" />
+
+            <ImageButton
+                android:id="@+id/btn_dim"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="50dp"
+                android:background = "@drawable/brighten_btn"
+                android:src="@drawable/ic_leftwhite" />
+
+            <ImageButton
+                android:id="@+id/btn_brighten"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/font_color"
+                android:src="@drawable/ic_rightwhite" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
