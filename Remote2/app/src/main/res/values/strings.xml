@@ -19,4 +19,7 @@
     <string name="status">Status:</string>
     <string name="logo_header">Vibe logo header</string>
     <string name="lighting">Mood Lighting</string>
+    <string name="cabin_lights">Cabin Lights</string>
+    <string name="brightness">Brightness</string>
+    <string name="cloud_lights">Cloud Lights</string>
 </resources>

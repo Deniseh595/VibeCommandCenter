@@ -8,4 +8,5 @@
     <item name="devicesListView" type="id">devicelist</item>
     <item name="scan" type="id">btOn</item>
     <item name="switch_neopixel" type="id">neopixel</item>
+    <item name="btn_cloud" type="id">btn_cloud</item>
 </resources>

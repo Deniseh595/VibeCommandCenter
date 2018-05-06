@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.support.v7.widget.AppCompatTextView;
@@ -38,10 +40,16 @@ public class LEDControl extends Activity {
     //Control variables
     private final String LEDON="111111";
     private final String LEDOFF = "0";
+    private final String BRIGHTEN="111111";
+    private final String DIM = "0";
+    private final String CLOUD = "0";
+
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
-    private Switch neopixel;
+    private Switch neopixel,cloud;
+    private Button brightenbtn,dimbtn;
+    private ProgressBar loading;
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
@@ -56,7 +64,8 @@ public class LEDControl extends Activity {
     private final static int REQUEST_ENABLE_BT = 1; // used to identify adding bluetooth names
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
     private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
-
+    private final static int STATE_CONNECTED = 4;
+    private final static int STATE_DISCONNECTED = 5;
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -67,13 +76,14 @@ public class LEDControl extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_led);
 
-
         neopixel = (Switch) findViewById(R.id.switch_neopixel);
-
+        cloud = (Switch) findViewById(R.id.btn_cloud);
+        brightenbtn = (Button) findViewById(R.id.btn_brighten);
+        dimbtn = (Button) findViewById(R.id.btn_dim);
+        loading = (ProgressBar)findViewById(R.id.pBar);
 
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
-
 
 
         mHandler = new Handler(){
@@ -89,18 +99,22 @@ public class LEDControl extends Activity {
                 }
 
                 if(msg.what == CONNECTING_STATUS){
-                    if(msg.arg1 == 1){}
+                    if(msg.arg1 == 1){
                        // mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+                        findViewById(R.id.pBar).setVisibility(View.GONE);
+                    }
                     else {}
-                    Toast.makeText(getApplicationContext(),"connection failed",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
                     // mBluetoothStatus.setText("Connection Failed");
+                    findViewById(R.id.pBar).setVisibility(View.GONE);
+
                 }
             }
         };
 
         if (mBTAdapter == null) {
-            // Device does not support Bluetooth
-           // mBluetoothStatus.setText(R.string.bt_not_found);
+            //Device does not support Bluetooth
+            //mBluetoothStatus.setText(R.string.bt_not_found);
             Log.d(TAG, "BT device not found...");
         }
         else {
@@ -108,12 +122,46 @@ public class LEDControl extends Activity {
                     new CompoundButton.OnCheckedChangeListener() {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                mConnectedThread.write(LEDON);
+                                //mConnectedThread.write(LEDON);
+                                Toast.makeText(getApplicationContext(),"turnon",Toast.LENGTH_SHORT).show();
+
                             } else {
-                                mConnectedThread.write(LEDOFF);
+                                //mConnectedThread.write(LEDOFF);
+                                Toast.makeText(getApplicationContext(),"turnoff",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
+             brightenbtn.setOnClickListener(
+                     new View.OnClickListener() {
+                         @Override
+                         public void onClick(View v) {
+                             //mConnectedThread.write(BRIGHTEN);
+                             Toast.makeText(getApplicationContext(),"brighten",Toast.LENGTH_SHORT).show();
+                         }
+                     }
+             );
+             dimbtn.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //mConnectedThread.write(DIM);
+                            Toast.makeText(getApplicationContext(),"dim",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            cloud.setOnCheckedChangeListener(
+                    new CompoundButton.OnCheckedChangeListener() {
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isChecked) {
+                                //mConnectedThread.write(CLOUDON);
+                                Toast.makeText(getApplicationContext(),"cloudon",Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                //mConnectedThread.write(CLOUDOFF);
+                                Toast.makeText(getApplicationContext(),"cloudoff",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        });
         }
 
     }
@@ -125,6 +173,7 @@ public class LEDControl extends Activity {
         super.onResume();
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         mBTAdapter.cancelDiscovery();
+        loading = (ProgressBar)findViewById(R.id.pBar);
         bluetoothOn();
         connectDevice();
     }

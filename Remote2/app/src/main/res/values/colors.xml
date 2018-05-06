@@ -9,6 +9,7 @@
     <color name ="font_color">#001213</color>
     <color name ="switchtracknormal">#E4E3EB</color>
     <color name = "switchtrackdisable">#E4E3EB</color>
-    <color name = "switchtrackactive">#3C2BBC</color>
+    <color name = "switchtrackactive">#E4E3EB</color>
+    <color name = "thumbon">#3d2fb2</color>
 
 </resources>

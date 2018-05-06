@@ -4,10 +4,12 @@
     <item android:state_checked="true">
         <layer-list>
             <item
-                android:width="20dp"
-                android:height="20dp">
+                android:top="1dp"
+                android:end="1dp"
+                android:width="28dp"
+                android:height="28dp">
                 <shape android:shape = "oval">
-                    <solid android:color = "@color/switchtrackactive" />
+                    <solid android:color = "@color/thumbon"/>
                 </shape>
             </item>
         </layer-list>
@@ -15,8 +17,10 @@
     <item android:state_checked="false">
         <layer-list>
             <item
-                android:width = "20dp"
-                android:height = "20dp">
+                android:top="1dp"
+                android:left="1dp"
+                android:width="28dp"
+                android:height="28dp">
                 <shape android:shape = "oval">
                     <solid android:color = "@color/font_color" />
                 </shape>
@@ -26,10 +30,12 @@
     <item >
         <layer-list>
             <item
-                android:width = "20dp"
-                android:height = "20dp">
+                android:top="1dp"
+                android:left="1dp"
+                android:width = "28dp"
+                android:height = "28dp">
                 <shape android:shape = "oval">
-                    <solid android:color = "@color/font_color" />
+                    <solid android:color = "@color/switchtrackdisable" />
                 </shape>
             </item>
         </layer-list>
