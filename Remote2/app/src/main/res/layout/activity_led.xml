@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/logo_header"
-            android:layout_width="178dp"
-            android:layout_height="33dp"
+            android:layout_width="202dp"
+            android:layout_height="67dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/logo_header"
             android:src="@drawable/ic_vibe3" />
@@ -38,25 +38,28 @@
             android:fontFamily="@font/work_sans_semibold"
             android:text="@string/lighting"
             android:textColor="@color/font_color"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
 
-        <ProgressBar
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pBar"
-            style="?android:attr/progressBarStyleLarge"
+            style="@style/SpinKitView.Large.ThreeBounce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="200dp"
-            android:layout_gravity ="center|center_horizontal"/>
+            android:layout_marginBottom="150dp"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/colorPrimaryDark" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="100dp"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="80dp">
 
             <TextView
+                android:id = "@+id/cabin_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -92,6 +95,7 @@
             android:layout_marginTop="50dp">
 
             <TextView
+                android:id ="@+id/bright_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -130,6 +134,7 @@
             android:layout_marginTop="50dp">
 
             <TextView
+                android:id = "@+id/cloud_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

@@ -29,8 +29,8 @@ public class MenuActivity extends AppCompatActivity {
 
         circleMenu = findViewById(R.id.circle_menu);
         circleMenu.setMainMenu(Color.parseColor("#ffffff"),R.mipmap.ic_vibe3,R.mipmap.ic_vibe3)
-        .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_lightbulb)
-                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_chameleon);
+        .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_bulblarge)
+                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_blurcirclelarge);
 
 
     }

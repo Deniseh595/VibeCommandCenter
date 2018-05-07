@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -50,6 +52,7 @@ public class LEDControl extends Activity {
     private Switch neopixel,cloud;
     private Button brightenbtn,dimbtn;
     private ProgressBar loading;
+    private TextView mood,cabintxt,brighttxt,cloudtxt;
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
@@ -73,6 +76,8 @@ public class LEDControl extends Activity {
         Log.d(TAG,"IN ONCREATE...");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Typeface tx = ResourcesCompat.getFont(getApplicationContext(), R.font.work_sans_semibold);
+        Typeface tx2 = ResourcesCompat.getFont(getApplicationContext(),R.font.work_sans);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_led);
 
@@ -81,10 +86,18 @@ public class LEDControl extends Activity {
         brightenbtn = (Button) findViewById(R.id.btn_brighten);
         dimbtn = (Button) findViewById(R.id.btn_dim);
         loading = (ProgressBar)findViewById(R.id.pBar);
+        mood = (TextView) findViewById(R.id.cabin_lighting);
+        cabintxt = (TextView) findViewById(R.id.cabin_text);
+        brighttxt = (TextView)findViewById(R.id.bright_text);
+        cloudtxt = (TextView)findViewById(R.id.cloud_text);
+
 
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
-
+        mood.setTypeface(tx);
+        cabintxt.setTypeface(tx2);
+        brighttxt.setTypeface(tx2);
+        cloudtxt.setTypeface(tx2);
 
         mHandler = new Handler(){
             public void handleMessage(android.os.Message msg){

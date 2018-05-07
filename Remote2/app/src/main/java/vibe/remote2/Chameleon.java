@@ -12,8 +12,6 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,12 +28,8 @@ public class Chameleon extends Activity {
 
 
     // GUI Components
-    private TextView mBluetoothStatus;
-    private TextView mReadBuffer;
     private BluetoothAdapter mBTAdapter;
-    private ListView mDevicesListView;
-    private Button mLEDon;
-    private Button mLEDoff;
+    private Button choiceone,turnoff,choicetwo,choicethree;
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
@@ -59,10 +53,9 @@ public class Chameleon extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chameleon);
 
-        mBluetoothStatus = (TextView)findViewById(R.id.bluetoothStatus);
-        mReadBuffer = (TextView) findViewById(R.id.readBuffer);
-        mLEDon = (Button)findViewById(R.id.matrixon);
-        mLEDoff = (Button)findViewById(R.id.matrixoff);
+
+        choiceone = (Button)findViewById(R.id.matrixon);
+        turnoff = (Button)findViewById(R.id.matrixoff);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
 
 
@@ -76,26 +69,26 @@ public class Chameleon extends Activity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mReadBuffer.setText(readMessage);
+                    //mReadBuffer.setText(readMessage);
                 }
 
                 if(msg.what == CONNECTING_STATUS){
-                    if(msg.arg1 == 1)
-                        mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-                    else
-                        mBluetoothStatus.setText("Connection Failed");
+                    if(msg.arg1 == 1){}
+                     //   mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+                    else{}
+                    //   mBluetoothStatus.setText("Connection Failed");
                 }
             }
         };
 
         if (mBTAdapter == null) {
             // Device does not support Bluetooth
-            mBluetoothStatus.setText(R.string.bt_not_found);
+          //  mBluetoothStatus.setText(R.string.bt_not_found);
             Log.d(TAG, "BT not found..");
         }
         else {
 
-            mLEDon.setOnClickListener(new View.OnClickListener(){
+            choiceone.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null) //First check to make sure thread created
@@ -103,7 +96,7 @@ public class Chameleon extends Activity {
                 }
             });
 
-            mLEDoff.setOnClickListener(new View.OnClickListener(){
+            turnoff.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
@@ -152,7 +145,7 @@ public class Chameleon extends Activity {
             //Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             //startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             mBTAdapter.enable();
-            mBluetoothStatus.setText(R.string.bt_enabled);
+           // mBluetoothStatus.setText(R.string.bt_enabled);
             Log.d(TAG, "BT turned on..");
         }
         else{
@@ -165,7 +158,7 @@ public class Chameleon extends Activity {
     private void bluetoothOff(){
         Log.d(TAG,"..IN BT OFF..");
         mBTAdapter.disable(); // turn off
-        mBluetoothStatus.setText(R.string.bt_disabled);
+      //  mBluetoothStatus.setText(R.string.bt_disabled);
         Log.d(TAG,"Bluetooth turned off");
     }
 
@@ -177,7 +170,7 @@ public class Chameleon extends Activity {
             return;
         }
 
-        mBluetoothStatus.setText(R.string.connecting);
+        //mBluetoothStatus.setText(R.string.connecting);
 
         new Thread()
         {
