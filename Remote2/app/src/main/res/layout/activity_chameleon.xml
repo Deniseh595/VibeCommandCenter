@@ -1,91 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingBottom="@dimen/activity_vertical_margin"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-tools:context="vibe.remote2.Chameleon">
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@drawable/dialog_soft"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="vibe.remote2.Chameleon">
 
 
 <LinearLayout
+    android:layout_width="500dp"
+    android:layout_height="500dp"
+    android:layout_centerInParent="true"
+    android:hapticFeedbackEnabled="true"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    tools:ignore="UselessParent">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/logo_header"
+        android:layout_width="202dp"
+        android:layout_height="67dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/logo_header"
+        android:src="@drawable/ic_vibe3" />
+
+    <TextView
+        android:id="@+id/chameleon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/work_sans_semibold"
+        android:text="@string/chameleon_txt"
+        android:textColor="@color/font_color"
+        android:textSize="30sp" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pBar"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="180dp"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorPrimaryDark" />
+
+    <GridLayout
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="10dp"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
         android:layout_gravity="center_horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/matrixon"
-            android:text = "@string/on_matrix"
-            android:layout_gravity="center_horizontal" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:contentDescription="@string/logo_choice"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_one"
+            android:background="@drawable/cloud_choicebtn"
+            android:text = "@string/logo_txt"
+            android:src = "@drawable/ic_vbadgetiny48"
+            android:layout_column="0"
+            android:layout_row = "0" />
+
+        <ImageButton
+            android:contentDescription="@string/stars_choice"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_two"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_flare48"
+            android:layout_column="1"
+            android:layout_row="0"/>
+
+        <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_three"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_film48"
+            android:layout_column="0"
+            android:layout_row= "1" />
+
+        <ImageButton
+            android:contentDescription="@string/off_button"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_cancel48"
             android:id="@+id/matrixoff"
-            android:text = "@string/off_matrix"/>
+            android:layout_column="1"
+            android:layout_row="1"/>
 
-    </LinearLayout>
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text= "@string/rx"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/lt_read_buffer"
-            android:id="@+id/readBuffer"
-            android:layout_centerHorizontal="true" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:text="Status:"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.9"
-
-            android:text="@string/lt_bluetooth_status"
-            android:id="@+id/bluetoothStatus"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:layout_centerHorizontal="true"/>
-    </LinearLayout>
-
+    </GridLayout>
 
 </LinearLayout>
 

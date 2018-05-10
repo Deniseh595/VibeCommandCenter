@@ -22,4 +22,10 @@
     <string name="cabin_lights">Cabin Lights</string>
     <string name="brightness">Brightness</string>
     <string name="cloud_lights">Cloud Lights</string>
+    <string name="chameleon_txt">Chameleon</string>
+    <string name="logo_choice">logo choice</string>
+    <string name="stars_choice">stars choice</string>
+    <string name="video_choice">video choice</string>
+    <string name="off_button">off button</string>
+    <string name="logo_txt">Logo</string>
 </resources>

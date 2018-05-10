@@ -40,11 +40,12 @@ import java.util.UUID;
 public class LEDControl extends Activity {
 
     //Control variables
-    private final String LEDON="111111";
-    private final String LEDOFF = "0";
-    private final String BRIGHTEN="111111";
-    private final String DIM = "0";
-    private final String CLOUD = "0";
+    private final String LEDON="ledon";
+    private final String LEDOFF = "ledoff";
+    private final String BRIGHTEN="brighten";
+    private final String DIM = "dim";
+    private final String CLOUDON = "cloudon";
+    private final String CLOUDOFF = "cloudoff";
 
 
     // GUI Components
@@ -67,8 +68,7 @@ public class LEDControl extends Activity {
     private final static int REQUEST_ENABLE_BT = 1; // used to identify adding bluetooth names
     private final static int MESSAGE_READ = 2; // used in bluetooth handler to identify message update
     private final static int CONNECTING_STATUS = 3; // used in bluetooth handler to identify message status
-    private final static int STATE_CONNECTED = 4;
-    private final static int STATE_DISCONNECTED = 5;
+
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -135,12 +135,14 @@ public class LEDControl extends Activity {
                     new CompoundButton.OnCheckedChangeListener() {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                //mConnectedThread.write(LEDON);
-                                Toast.makeText(getApplicationContext(),"turnon",Toast.LENGTH_SHORT).show();
+                                if(mConnectedThread != null)
+                                mConnectedThread.write(LEDON);
+                                Toast.makeText(getApplicationContext(),"ledon",Toast.LENGTH_SHORT).show();
 
                             } else {
-                                //mConnectedThread.write(LEDOFF);
-                                Toast.makeText(getApplicationContext(),"turnoff",Toast.LENGTH_SHORT).show();
+                                if(mConnectedThread != null)
+                                mConnectedThread.write(LEDOFF);
+                                Toast.makeText(getApplicationContext(),"ledoff",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -148,7 +150,8 @@ public class LEDControl extends Activity {
                      new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
-                             //mConnectedThread.write(BRIGHTEN);
+                             if(mConnectedThread != null)
+                             mConnectedThread.write(BRIGHTEN);
                              Toast.makeText(getApplicationContext(),"brighten",Toast.LENGTH_SHORT).show();
                          }
                      }
@@ -157,7 +160,8 @@ public class LEDControl extends Activity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            //mConnectedThread.write(DIM);
+                            if(mConnectedThread != null)
+                            mConnectedThread.write(DIM);
                             Toast.makeText(getApplicationContext(),"dim",Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -166,11 +170,13 @@ public class LEDControl extends Activity {
                     new CompoundButton.OnCheckedChangeListener() {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                //mConnectedThread.write(CLOUDON);
+                                if(mConnectedThread != null)
+                                mConnectedThread.write(CLOUDON);
                                 Toast.makeText(getApplicationContext(),"cloudon",Toast.LENGTH_SHORT).show();
 
                             } else {
-                                //mConnectedThread.write(CLOUDOFF);
+                                if(mConnectedThread != null)
+                                mConnectedThread.write(CLOUDOFF);
                                 Toast.makeText(getApplicationContext(),"cloudoff",Toast.LENGTH_SHORT).show();
                             }
                         }

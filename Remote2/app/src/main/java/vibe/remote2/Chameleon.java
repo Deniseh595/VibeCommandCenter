@@ -5,13 +5,23 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +33,17 @@ import java.util.UUID;
 public class Chameleon extends Activity {
 
     //Control strings
-    private final String MATRIXON = "1";
-    private final String MATRIXOFF = "0";
+    private final String ONE = "choiceone";
+    private final String MATRIXOFF = "choiceoff";
+    private final String TWO = "choicetwo";
+    private final String THREE = "choicethree";
+
 
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
-    private Button choiceone,turnoff,choicetwo,choicethree;
+    private ImageButton choiceone,turnoff,choicetwo,choicethree;
+    private TextView chamtxt;
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
@@ -50,14 +64,22 @@ public class Chameleon extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"IN ONCREATE...");
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Typeface tx = ResourcesCompat.getFont(getApplicationContext(), R.font.work_sans_semibold);
+        Typeface tx2 = ResourcesCompat.getFont(getApplicationContext(),R.font.work_sans);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chameleon);
 
+        choiceone = (ImageButton)findViewById(R.id.choice_one);
+        turnoff = (ImageButton)findViewById(R.id.matrixoff);
+        choicetwo = (ImageButton)findViewById(R.id.choice_two);
+        choicethree = (ImageButton) findViewById(R.id.choice_three);
+        chamtxt = (TextView)findViewById(R.id.chameleon_title);
 
-        choiceone = (Button)findViewById(R.id.matrixon);
-        turnoff = (Button)findViewById(R.id.matrixoff);
+
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
-
+        chamtxt.setTypeface(tx);
 
 
         mHandler = new Handler(){
@@ -69,14 +91,19 @@ public class Chameleon extends Activity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    //mReadBuffer.setText(readMessage);
+                    // mReadBuffer.setText(readMessage);
                 }
 
                 if(msg.what == CONNECTING_STATUS){
-                    if(msg.arg1 == 1){}
-                     //   mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-                    else{}
-                    //   mBluetoothStatus.setText("Connection Failed");
+                    if(msg.arg1 == 1){
+                        // mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+                        findViewById(R.id.pBar).setVisibility(View.GONE);
+                    }
+                    else {}
+                    Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
+                    // mBluetoothStatus.setText("Connection Failed");
+                    findViewById(R.id.pBar).setVisibility(View.GONE);
+
                 }
             }
         };
@@ -92,7 +119,28 @@ public class Chameleon extends Activity {
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write(MATRIXON);
+                        mConnectedThread.write(ONE);
+                        Toast.makeText(getApplicationContext(),"choiceone",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            choicetwo.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null) //First check to make sure thread created
+                        mConnectedThread.write(TWO);
+                        Toast.makeText(getApplicationContext(),"choicetwo",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choicethree.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null) //First check to make sure thread created
+                        mConnectedThread.write(THREE);
+                        Toast.makeText(getApplicationContext(),"choicethree",Toast.LENGTH_SHORT).show();
+
                 }
             });
 
@@ -102,12 +150,13 @@ public class Chameleon extends Activity {
                 public void onClick(View v) {
                     if (mConnectedThread != null)
                         mConnectedThread.write(MATRIXOFF);
+                        Toast.makeText(getApplicationContext(),"choiceoff",Toast.LENGTH_SHORT).show();
+
                 }
             });
 
         }
     }
-
 
     @Override
     protected void onResume() {

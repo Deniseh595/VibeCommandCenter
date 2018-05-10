@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".LEDControl"
             android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Chameleon"/>
+        <activity android:name=".Chameleon"
+            android:theme="@android:style/Theme.Dialog"/>
 
         <meta-data
             android:name="preloaded_fonts"
