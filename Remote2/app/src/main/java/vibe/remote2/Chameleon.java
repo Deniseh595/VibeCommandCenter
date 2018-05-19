@@ -118,8 +118,8 @@ public class Chameleon extends Activity {
             choiceone.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write(ONE);
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(ONE);}
                         Toast.makeText(getApplicationContext(),"choiceone",Toast.LENGTH_SHORT).show();
                 }
             });
@@ -127,8 +127,8 @@ public class Chameleon extends Activity {
             choicetwo.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write(TWO);
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                    mConnectedThread.write(TWO);}
                         Toast.makeText(getApplicationContext(),"choicetwo",Toast.LENGTH_SHORT).show();
 
                 }
@@ -137,8 +137,8 @@ public class Chameleon extends Activity {
             choicethree.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    if(mConnectedThread != null) //First check to make sure thread created
-                        mConnectedThread.write(THREE);
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                       mConnectedThread.write(THREE);}
                         Toast.makeText(getApplicationContext(),"choicethree",Toast.LENGTH_SHORT).show();
 
                 }
@@ -148,8 +148,8 @@ public class Chameleon extends Activity {
 
                 @Override
                 public void onClick(View v) {
-                    if (mConnectedThread != null)
-                        mConnectedThread.write(MATRIXOFF);
+                    if (mConnectedThread != null){
+                        mConnectedThread.write(MATRIXOFF);}
                         Toast.makeText(getApplicationContext(),"choiceoff",Toast.LENGTH_SHORT).show();
 
                 }
