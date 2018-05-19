@@ -135,13 +135,13 @@ public class LEDControl extends Activity {
                     new CompoundButton.OnCheckedChangeListener() {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                if(mConnectedThread != null)
-                                mConnectedThread.write(LEDON);
+                                if(mConnectedThread != null){
+                                mConnectedThread.write(LEDON);}
                                 Toast.makeText(getApplicationContext(),"ledon",Toast.LENGTH_SHORT).show();
 
                             } else {
-                                if(mConnectedThread != null)
-                                mConnectedThread.write(LEDOFF);
+                                if(mConnectedThread != null){
+                                mConnectedThread.write(LEDOFF);}
                                 Toast.makeText(getApplicationContext(),"ledoff",Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -150,9 +150,10 @@ public class LEDControl extends Activity {
                      new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
-                             if(mConnectedThread != null)
-                             mConnectedThread.write(BRIGHTEN);
+                             if(mConnectedThread != null){
+                             mConnectedThread.write(BRIGHTEN);}
                              Toast.makeText(getApplicationContext(),"brighten",Toast.LENGTH_SHORT).show();
+
                          }
                      }
              );
@@ -160,8 +161,8 @@ public class LEDControl extends Activity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(mConnectedThread != null)
-                            mConnectedThread.write(DIM);
+                            if(mConnectedThread != null){
+                            mConnectedThread.write(DIM);}
                             Toast.makeText(getApplicationContext(),"dim",Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -170,13 +171,13 @@ public class LEDControl extends Activity {
                     new CompoundButton.OnCheckedChangeListener() {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
-                                if(mConnectedThread != null)
-                                mConnectedThread.write(CLOUDON);
+                                if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDON);}
                                 Toast.makeText(getApplicationContext(),"cloudon",Toast.LENGTH_SHORT).show();
 
                             } else {
-                                if(mConnectedThread != null)
-                                mConnectedThread.write(CLOUDOFF);
+                                if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDOFF);}
                                 Toast.makeText(getApplicationContext(),"cloudoff",Toast.LENGTH_SHORT).show();
                             }
                         }
