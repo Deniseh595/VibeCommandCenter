@@ -76,10 +76,11 @@ public class LEDControl extends Activity {
         Log.d(TAG,"IN ONCREATE...");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Typeface tx = ResourcesCompat.getFont(getApplicationContext(), R.font.work_sans_semibold);
-        Typeface tx2 = ResourcesCompat.getFont(getApplicationContext(),R.font.work_sans);
+        Typeface tx = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/work_sans_med.ttf");
+        Typeface tx2 = Typeface.createFromAsset(getApplicationContext().getAssets(),"fonts/work_sans.ttf");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_led);
+
 
         neopixel = (Switch) findViewById(R.id.switch_neopixel);
         cloud = (Switch) findViewById(R.id.btn_cloud);
