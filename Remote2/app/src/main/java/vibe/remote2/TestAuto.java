@@ -1,5 +1,6 @@
 package vibe.remote2;
 
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -11,15 +12,22 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.CompoundButton;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
 import android.widget.Toast;
+
 
 import org.w3c.dom.Text;
 
@@ -30,28 +38,28 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class Chameleon extends Activity {
+public class TestAuto extends Activity {
 
-    //Control strings
-    private final String ONE = "choiceone";
-    private final String MATRIXOFF = "choiceoff";
-    private final String TWO = "choicetwo";
-    private final String THREE = "choicethree";
-
+    //Control variables
+    private final String LEDON="ledon";
+    private final String LEDOFF = "ledoff";
+    private final String BRIGHTEN="brighten";
+    private final String DIM = "dim";
+    private final String CLOUDON = "cloudon";
+    private final String CLOUDOFF = "cloudoff";
 
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
-    private ImageButton choiceone,turnoff,choicetwo,choicethree;
-    private TextView chamtxt;
+
 
     private final String TAG = "bluetoothdebug";
     private Handler mHandler; // Main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
 
-    private static final UUID BTMODULEUUID = UUID.fromString("7be1fcb3-5776-42fb-91fd-2ee7b5bbb86d"); // "random" unique identifier
-    private static String ADDRESS = "00:1A:7D:DA:71:13";
+    private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
+    private static String ADDRESS = "98:D3:32:20:C8:7A";
 
 
     // #defines for identifying shared types between calling functions
@@ -64,21 +72,9 @@ public class Chameleon extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"IN ONCREATE...");
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Typeface tx = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/work_sans_med.ttf");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chameleon);
-
-        choiceone = (ImageButton)findViewById(R.id.choice_one);
-        turnoff = (ImageButton)findViewById(R.id.matrixoff);
-        choicetwo = (ImageButton)findViewById(R.id.choice_two);
-        choicethree = (ImageButton) findViewById(R.id.choice_three);
-        chamtxt = (TextView)findViewById(R.id.chameleon_title);
-
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
-        chamtxt.setTypeface(tx);
 
 
         mHandler = new Handler(){
@@ -108,54 +104,24 @@ public class Chameleon extends Activity {
         };
 
         if (mBTAdapter == null) {
-            // Device does not support Bluetooth
-          //  mBluetoothStatus.setText(R.string.bt_not_found);
-            Log.d(TAG, "BT not found..");
+            //Device does not support Bluetooth
+            //mBluetoothStatus.setText(R.string.bt_not_found);
+            Log.d(TAG, "BT device not found...");
         }
         else {
 
-            choiceone.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    if(mConnectedThread != null){ //First check to make sure thread created
-                        mConnectedThread.write(ONE);}
-                        Toast.makeText(getApplicationContext(),"choiceone",Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (mConnectedThread !=null){
+                mConnectedThread.write(CLOUDON);
+                Toast.makeText(getApplicationContext(),"Turned Cloud ON",Toast.LENGTH_SHORT).show();
+               // mConnectedThread.write(CLOUDOFF);
+               // Toast.makeText(getApplicationContext(),"Turned Cloud OFF",Toast.LENGTH_SHORT).show();
 
-            choicetwo.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    if(mConnectedThread != null){ //First check to make sure thread created
-                    mConnectedThread.write(TWO);}
-                        Toast.makeText(getApplicationContext(),"choicetwo",Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-            choicethree.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    if(mConnectedThread != null){ //First check to make sure thread created
-                       mConnectedThread.write(THREE);}
-                        Toast.makeText(getApplicationContext(),"choicethree",Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-            turnoff.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    if (mConnectedThread != null){
-                        mConnectedThread.write(MATRIXOFF);}
-                        Toast.makeText(getApplicationContext(),"choiceoff",Toast.LENGTH_SHORT).show();
-
-                }
-            });
+            }
 
         }
+
     }
+
 
     @Override
     protected void onResume() {
@@ -193,11 +159,11 @@ public class Chameleon extends Activity {
             //Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             //startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             mBTAdapter.enable();
-           // mBluetoothStatus.setText(R.string.bt_enabled);
-            Log.d(TAG, "BT turned on..");
+            // mBluetoothStatus.setText(R.string.bt_enabled);
+            Log.d(TAG, "Bluetooth enabled..");
         }
         else{
-            Log.d(TAG, "BT is already on...");
+            Log.d(TAG, "Bluetooth already on..");
         }
 
     }
@@ -206,19 +172,20 @@ public class Chameleon extends Activity {
     private void bluetoothOff(){
         Log.d(TAG,"..IN BT OFF..");
         mBTAdapter.disable(); // turn off
-      //  mBluetoothStatus.setText(R.string.bt_disabled);
-        Log.d(TAG,"Bluetooth turned off");
+        // mBluetoothStatus.setText(R.string.bt_disabled);
+        Log.d(TAG, "BT not on...");
     }
+
 
 
     public void connectDevice() {
 
         if(!mBTAdapter.isEnabled()) {
-            Log.d(TAG, "BT not on");
+            Log.d(TAG, "BT not on..");
             return;
         }
 
-        //mBluetoothStatus.setText(R.string.connecting);
+        //  mBluetoothStatus.setText(R.string.connecting);
 
         new Thread()
         {
@@ -231,7 +198,7 @@ public class Chameleon extends Activity {
                     mBTSocket = createBluetoothSocket(device);
                 } catch (IOException e) {
                     fail = true;
-                    Log.d(TAG, "Socket creation failed..");
+                    Log.d(TAG, "Socket creation failed...");
                 }
                 // Establish the Bluetooth socket connection.
                 try {
@@ -250,7 +217,7 @@ public class Chameleon extends Activity {
                     mConnectedThread = new ConnectedThread(mBTSocket);
                     mConnectedThread.start();
 
-                    mHandler.obtainMessage(CONNECTING_STATUS, 1, -1,"Chameleon")
+                    mHandler.obtainMessage(CONNECTING_STATUS, 1, -1,"HC-05")
                             .sendToTarget();
                 }
             }
@@ -314,6 +281,7 @@ public class Chameleon extends Activity {
 
         /* Call this from the main activity to send data to the remote device */
         public void write(String input) {
+            Log.d(TAG,"SENDING VALUE:" + input);
             byte[] bytes = input.getBytes();           //converts entered String into bytes
             try {
                 mmOutStream.write(bytes);

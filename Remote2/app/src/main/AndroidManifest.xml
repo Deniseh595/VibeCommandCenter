@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_shadowlogo"
         android:supportsRtl="true"
         android:theme="@style/Remote2Theme"
-        tools:replace = "android:label">
+        tools:replace="android:label">
         <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,14 +21,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LEDControl"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Chameleon"
-            android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".LEDControl"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".Chameleon"
+            android:theme="@android:style/Theme.Dialog" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".TestAuto"
+            android:theme = "@android:style/Theme.NoDisplay"/>
+
     </application>
 
 </manifest>

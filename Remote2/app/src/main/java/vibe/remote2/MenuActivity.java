@@ -30,7 +30,8 @@ public class MenuActivity extends AppCompatActivity {
         circleMenu = findViewById(R.id.circle_menu);
         circleMenu.setMainMenu(Color.parseColor("#ffffff"),R.mipmap.ic_vibe3,R.mipmap.ic_vibe3)
         .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_bulblarge)
-                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_blurcirclelarge);
+                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_blurcirclelarge)
+                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_chameleon);
 
 
     }
@@ -64,6 +65,9 @@ public class MenuActivity extends AppCompatActivity {
                     toast.show();*/
                     mHandler.postDelayed(mUpdateTimeTask2,900);
                 }
+                if (i==2){
+                    mHandler.postDelayed(mUpdateTimeTask3,900);
+                }
             }
 
             private Runnable mUpdateTimeTask = new Runnable() {
@@ -79,6 +83,15 @@ public class MenuActivity extends AppCompatActivity {
                 public void run() {
                     Intent chamIntent = new Intent(MenuActivity.this,Chameleon.class);
                     startActivity(chamIntent);
+                }
+            };
+
+            private Runnable mUpdateTimeTask3 = new Runnable() {
+                @Override
+                public void run() {
+                    Intent testIntent = new Intent (MenuActivity.this,TestAuto.class);
+                    startActivity(testIntent);
+
                 }
             };
 
