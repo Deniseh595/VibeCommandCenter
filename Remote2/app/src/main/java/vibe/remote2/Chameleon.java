@@ -45,7 +45,7 @@ public class Chameleon extends Activity {
     private ImageButton choiceone,turnoff,choicetwo,choicethree;
     private TextView chamtxt;
 
-    private final String TAG = "bluetoothdebug";
+    private final String TAG = "CHAMDEBUG";
     private Handler mHandler; // Main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path

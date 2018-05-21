@@ -55,7 +55,7 @@ public class LEDControl extends Activity {
     private ProgressBar loading;
     private TextView mood,cabintxt,brighttxt,cloudtxt;
 
-    private final String TAG = "bluetoothdebug";
+    private final String TAG = "LEDDEBUG";
     private Handler mHandler; // Main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path

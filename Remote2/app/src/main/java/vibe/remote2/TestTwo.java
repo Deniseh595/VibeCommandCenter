@@ -118,7 +118,7 @@ public class TestTwo extends Activity {
         mBTAdapter.cancelDiscovery();
         bluetoothOn();
         connectDevice();
-        Intent testtwoIntent = new Intent (TestTwo.this,Chameleon.class);
+        Intent testtwoIntent = new Intent (TestTwo.this,TestAuto.class);
         startActivity(testtwoIntent);
         finish();
     }
