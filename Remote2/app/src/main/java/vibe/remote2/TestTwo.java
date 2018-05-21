@@ -1,33 +1,26 @@
 package vibe.remote2;
 
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Switch;
+import android.widget.ImageButton;
 import android.widget.TextView;
-import android.support.v7.widget.AppCompatTextView;
 import android.widget.Toast;
-
 
 import org.w3c.dom.Text;
 
@@ -38,28 +31,27 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-public class TestAuto extends Activity {
+public class TestTwo extends Activity {
 
-    //Control variables
-    private final String LEDON="ledon";
-    private final String LEDOFF = "ledoff";
-    private final String BRIGHTEN="brighten";
-    private final String DIM = "dim";
-    private final String CLOUDON = "cloudon";
-    private final String CLOUDOFF = "cloudoff";
+    //Control strings
+    private final String ONE = "choiceone";
+    private final String MATRIXOFF = "choiceoff";
+    private final String TWO = "choicetwo";
+    private final String THREE = "choicethree";
+
 
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
 
 
-    private final String TAG = "AUTODEBUG";
+    private final String TAG = "TESTTWODEBUG";
     private Handler mHandler; // Main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
 
-    private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // "random" unique identifier
-    private static String ADDRESS = "98:D3:32:20:C8:7A";
+    private static final UUID BTMODULEUUID = UUID.fromString("7be1fcb3-5776-42fb-91fd-2ee7b5bbb86d"); // "random" unique identifier
+    private static String ADDRESS = "00:1A:7D:DA:71:13";
 
 
     // #defines for identifying shared types between calling functions
@@ -72,6 +64,7 @@ public class TestAuto extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG,"IN ONCREATE...");
+
         super.onCreate(savedInstanceState);
 
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
@@ -98,31 +91,24 @@ public class TestAuto extends Activity {
                     Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
                     // mBluetoothStatus.setText("Connection Failed");
 
-
                 }
             }
         };
 
         if (mBTAdapter == null) {
-            //Device does not support Bluetooth
-            //mBluetoothStatus.setText(R.string.bt_not_found);
-            Log.d(TAG, "BT device not found...");
+            // Device does not support Bluetooth
+            //  mBluetoothStatus.setText(R.string.bt_not_found);
+            Log.d(TAG, "BT not found..");
         }
         else {
 
-            if (mConnectedThread !=null){
-                mConnectedThread.write(CLOUDON);
-                Toast.makeText(getApplicationContext(),"Turned Cloud ON",Toast.LENGTH_SHORT).show();
-               // mConnectedThread.write(CLOUDOFF);
-               // Toast.makeText(getApplicationContext(),"Turned Cloud OFF",Toast.LENGTH_SHORT).show();
-
+            if(mConnectedThread!=null)
+            {mConnectedThread.write(ONE);
+                Toast.makeText(getApplicationContext(),"Sent choiceone",Toast.LENGTH_SHORT).show();
             }
 
         }
-
-
     }
-
 
     @Override
     protected void onResume() {
@@ -132,6 +118,8 @@ public class TestAuto extends Activity {
         mBTAdapter.cancelDiscovery();
         bluetoothOn();
         connectDevice();
+        Intent testtwoIntent = new Intent (TestTwo.this,Chameleon.class);
+        startActivity(testtwoIntent);
         finish();
     }
 
@@ -162,10 +150,10 @@ public class TestAuto extends Activity {
             //startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
             mBTAdapter.enable();
             // mBluetoothStatus.setText(R.string.bt_enabled);
-            Log.d(TAG, "Bluetooth enabled..");
+            Log.d(TAG, "BT turned on..");
         }
         else{
-            Log.d(TAG, "Bluetooth already on..");
+            Log.d(TAG, "BT is already on...");
         }
 
     }
@@ -174,20 +162,19 @@ public class TestAuto extends Activity {
     private void bluetoothOff(){
         Log.d(TAG,"..IN BT OFF..");
         mBTAdapter.disable(); // turn off
-        // mBluetoothStatus.setText(R.string.bt_disabled);
-        Log.d(TAG, "BT not on...");
+        //  mBluetoothStatus.setText(R.string.bt_disabled);
+        Log.d(TAG,"Bluetooth turned off");
     }
-
 
 
     public void connectDevice() {
 
         if(!mBTAdapter.isEnabled()) {
-            Log.d(TAG, "BT not on..");
+            Log.d(TAG, "BT not on");
             return;
         }
 
-        //  mBluetoothStatus.setText(R.string.connecting);
+        //mBluetoothStatus.setText(R.string.connecting);
 
         new Thread()
         {
@@ -200,7 +187,7 @@ public class TestAuto extends Activity {
                     mBTSocket = createBluetoothSocket(device);
                 } catch (IOException e) {
                     fail = true;
-                    Log.d(TAG, "Socket creation failed...");
+                    Log.d(TAG, "Socket creation failed..");
                 }
                 // Establish the Bluetooth socket connection.
                 try {
@@ -219,7 +206,7 @@ public class TestAuto extends Activity {
                     mConnectedThread = new ConnectedThread(mBTSocket);
                     mConnectedThread.start();
 
-                    mHandler.obtainMessage(CONNECTING_STATUS, 1, -1,"HC-05")
+                    mHandler.obtainMessage(CONNECTING_STATUS, 1, -1,"Chameleon")
                             .sendToTarget();
                 }
             }
@@ -283,7 +270,6 @@ public class TestAuto extends Activity {
 
         /* Call this from the main activity to send data to the remote device */
         public void write(String input) {
-            Log.d(TAG,"SENDING VALUE:" + input);
             byte[] bytes = input.getBytes();           //converts entered String into bytes
             try {
                 mmOutStream.write(bytes);

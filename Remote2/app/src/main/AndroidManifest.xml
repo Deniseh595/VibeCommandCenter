@@ -32,8 +32,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".TestAuto"
-            android:theme = "@android:style/Theme.NoDisplay"/>
+        <activity
+            android:name=".TestAuto"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <activity android:name=".TestTwo"
+            android:theme="@android:style/Theme.NoDisplay" />
 
     </application>
 

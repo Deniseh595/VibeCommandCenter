@@ -31,7 +31,9 @@ public class MenuActivity extends AppCompatActivity {
         circleMenu.setMainMenu(Color.parseColor("#ffffff"),R.mipmap.ic_vibe3,R.mipmap.ic_vibe3)
         .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_bulblarge)
                 .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_blurcirclelarge)
-                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_chameleon);
+                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_chameleon)
+                .addSubMenu(Color.parseColor("#ffffff"),R.mipmap.ic_blurline36);
+
 
 
     }
@@ -68,6 +70,9 @@ public class MenuActivity extends AppCompatActivity {
                 if (i==2){
                     mHandler.postDelayed(mUpdateTimeTask3,900);
                 }
+                if (i==3){
+                    mHandler.postDelayed(mUpdateTimeTask4,900);
+                }
             }
 
             private Runnable mUpdateTimeTask = new Runnable() {
@@ -91,6 +96,17 @@ public class MenuActivity extends AppCompatActivity {
                 public void run() {
                     Intent testIntent = new Intent (MenuActivity.this,TestAuto.class);
                     startActivity(testIntent);
+
+
+                }
+            };
+
+            private Runnable mUpdateTimeTask4 = new Runnable() {
+                @Override
+                public void run() {
+                    Intent testIntent = new Intent (MenuActivity.this,TestTwo.class);
+                    startActivity(testIntent);
+
 
                 }
             };
