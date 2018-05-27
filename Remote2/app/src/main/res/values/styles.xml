@@ -6,10 +6,12 @@
         <item name="colorPrimary">@color/colorPrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
 
     </style>
 
-    <style name="Remote2Theme" parent="Theme.AppCompat.NoActionBar" >
+    <style name="Remote2Theme" parent = "Theme.AppCompat.NoActionBar" >
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name = "android:colorBackground">@color/colorBackground</item>
         <item name = "android:textColorPrimary">@color/font_color</item>

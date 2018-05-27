@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_height="600dp"
         android:layout_centerInParent="true"
         android:hapticFeedbackEnabled="true"
         android:orientation="vertical"
@@ -40,15 +40,15 @@
             android:textColor="@color/font_color"
             android:textSize="30sp" />
 
-        <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pBar"
             style="@style/SpinKitView.Large.ThreeBounce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="150dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="250dp"
+            android:layout_marginTop="100dp"
+            android:visibility="gone"
             app:SpinKit_Color="@color/colorPrimaryDark" />
 
         <LinearLayout
@@ -105,24 +105,26 @@
                 android:textColor="@color/font_color"
                 android:textSize="18sp"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_dim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/darken_btn"
+                android:background="@drawable/brighten_btn"
+                android:src ="@drawable/ic_bright4"
                 android:gravity="center_vertical|fill_horizontal" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_brighten"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/brighten_btn" />
+                android:background="@drawable/brighten_btn"
+                android:src ="@drawable/ic_bright7"/>
 
         </LinearLayout>
 
@@ -159,6 +161,118 @@
                 tools:checked="false" />
 
         </LinearLayout>
+        <GridLayout
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="0dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:columnCount="5"
+            android:rowCount="2">
+
+            <ImageButton
+                android:contentDescription="@string/choice_one"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_one"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numberone"
+                android:layout_column="0"
+                android:layout_row = "0" />
+            <ImageButton
+                android:contentDescription="@string/choice_two"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_two"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numbertwo"
+                android:layout_column="1"
+                android:layout_row = "0" />
+            <ImageButton
+                android:contentDescription="@string/choice_three"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_three"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numberthree"
+                android:layout_column="2"
+                android:layout_row = "0" />
+            <ImageButton
+                android:contentDescription="@string/choice_four"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_four"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numberfour"
+                android:layout_column="3"
+                android:layout_row = "0" />
+            <ImageButton
+                android:contentDescription="@string/choice_five"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_five"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numberfive"
+                android:layout_column="0"
+                android:layout_row = "1" />
+            <ImageButton
+                android:contentDescription="@string/choice_six"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_six"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numbersix"
+                android:layout_column="1"
+                android:layout_row = "1" />
+            <ImageButton
+                android:contentDescription="@string/choice_seven"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_seven"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numberseven"
+                android:layout_column="2"
+                android:layout_row = "1" />
+            <ImageButton
+                android:contentDescription="@string/choice_eight"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_eight"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_numbereight"
+                android:layout_column="3"
+                android:layout_row = "1" />
+
+            <ImageButton
+                android:contentDescription="@string/choice_eight"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:id="@id/btn_cloud_off"
+                android:background="@drawable/cloud_choicebtn"
+                android:src = "@drawable/ic_cancel48"
+                android:layout_column="4"
+                android:layout_row = "1" />
+
+        </GridLayout>
 
     </LinearLayout>
 

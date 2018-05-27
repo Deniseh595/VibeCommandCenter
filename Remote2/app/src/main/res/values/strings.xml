@@ -28,4 +28,12 @@
     <string name="video_choice">video choice</string>
     <string name="off_button">off button</string>
     <string name="logo_txt">Logo</string>
+    <string name="choice_one">First Choice</string>
+    <string name="choice_two">Cloud two</string>
+    <string name="choice_three">Cloud three</string>
+    <string name="choice_four">Cloud four</string>
+    <string name="choice_five">Coud five</string>
+    <string name="choice_six">Cloud six</string>
+    <string name="choice_seven">Cloud seven</string>
+    <string name="choice_eight">Cloud eight</string>
 </resources>

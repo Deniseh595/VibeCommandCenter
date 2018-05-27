@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothSocket;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -44,14 +46,22 @@ public class LEDControl extends Activity {
     private final String LEDOFF = "ledoff";
     private final String BRIGHTEN="brighten";
     private final String DIM = "dim";
-    private final String CLOUDON = "cloudon";
+    private final String CLOUDONE = "cloud1";
+    private final String CLOUDTWO = "cloud2";
+    private final String CLOUDTHREE = "cloud3";
+    private final String CLOUDFOUR = "cloud4";
+    private final String CLOUDFIVE = "cloud5";
+    private final String CLOUDSIX = "cloud6";
+    private final String CLOUDSEVEN = "cloud7";
+    private final String CLOUDEIGHT = "cloud8";
     private final String CLOUDOFF = "cloudoff";
 
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
     private Switch neopixel,cloud;
-    private Button brightenbtn,dimbtn;
+    private ImageButton btnone,btntwo,btnthree,btnfour,btnfive,btnsix,btnseven,btneight,btnoff;
+    private ImageButton brightenbtn,dimbtn;
     private ProgressBar loading;
     private TextView mood,cabintxt,brighttxt,cloudtxt;
 
@@ -84,8 +94,17 @@ public class LEDControl extends Activity {
 
         neopixel = (Switch) findViewById(R.id.switch_neopixel);
         cloud = (Switch) findViewById(R.id.btn_cloud);
-        brightenbtn = (Button) findViewById(R.id.btn_brighten);
-        dimbtn = (Button) findViewById(R.id.btn_dim);
+        btnone = (ImageButton)findViewById(R.id.btn_one);
+        btntwo = (ImageButton)findViewById(R.id.btn_two);
+        btnthree = (ImageButton)findViewById(R.id.btn_three);
+        btnfour = (ImageButton)findViewById(R.id.btn_four);
+        btnfive = (ImageButton)findViewById(R.id.btn_five);
+        btnsix = (ImageButton)findViewById(R.id.btn_six);
+        btnseven = (ImageButton)findViewById(R.id.btn_seven);
+        btneight = (ImageButton)findViewById(R.id.btn_eight);
+        btnoff = (ImageButton)findViewById(R.id.btn_cloud_off);
+        brightenbtn = (ImageButton) findViewById(R.id.btn_brighten);
+        dimbtn = (ImageButton) findViewById(R.id.btn_dim);
         loading = (ProgressBar)findViewById(R.id.pBar);
         mood = (TextView) findViewById(R.id.cabin_lighting);
         cabintxt = (TextView) findViewById(R.id.cabin_text);
@@ -173,7 +192,7 @@ public class LEDControl extends Activity {
                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                             if (isChecked) {
                                 if(mConnectedThread != null){
-                                mConnectedThread.write(CLOUDON);}
+                                mConnectedThread.write(CLOUDONE);}
                                 Toast.makeText(getApplicationContext(),"cloudon",Toast.LENGTH_SHORT).show();
 
                             } else {
@@ -183,6 +202,104 @@ public class LEDControl extends Activity {
                             }
                         }
                         });
+            btnone.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDONE);}
+                            Toast.makeText(getApplicationContext(),"cloud1",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            btntwo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDTWO);}
+                            Toast.makeText(getApplicationContext(),"cloud2",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+            btnthree.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDTHREE);}
+                            Toast.makeText(getApplicationContext(),"cloud3",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+            btnfour.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDFOUR);}
+                            Toast.makeText(getApplicationContext(),"cloud4",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+            btnfive.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDFIVE);}
+                            Toast.makeText(getApplicationContext(),"cloud5",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+            btnsix.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDSIX);}
+                            Toast.makeText(getApplicationContext(),"cloud6",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+            btnseven.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDSEVEN);}
+                            Toast.makeText(getApplicationContext(),"cloud7",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+            );
+            btneight.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDEIGHT);}
+                            Toast.makeText(getApplicationContext(),"cloud8",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
+
+            btnoff.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if(mConnectedThread != null){
+                                mConnectedThread.write(CLOUDOFF);}
+                            Toast.makeText(getApplicationContext(),"cloudoff",Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+            );
         }
 
     }

@@ -37,12 +37,18 @@ public class Chameleon extends Activity {
     private final String MATRIXOFF = "choiceoff";
     private final String TWO = "choicetwo";
     private final String THREE = "choicethree";
+    private final String FOUR = "choicefour";
+    private final String FIVE = "choicefive";
+    private final String SIX = "choicesix";
+    private final String SEVEN = "choiceseven";
+    private final String EIGHT = "choiceeight";
+
 
 
 
     // GUI Components
     private BluetoothAdapter mBTAdapter;
-    private ImageButton choiceone,turnoff,choicetwo,choicethree;
+    private ImageButton choiceone,turnoff,choicetwo,choicethree,choicefour,choicefive,choicesix,choiceseven,choiceeight;
     private TextView chamtxt;
 
     private final String TAG = "CHAMDEBUG";
@@ -71,9 +77,16 @@ public class Chameleon extends Activity {
         setContentView(R.layout.activity_chameleon);
 
         choiceone = (ImageButton)findViewById(R.id.choice_one);
-        turnoff = (ImageButton)findViewById(R.id.matrixoff);
         choicetwo = (ImageButton)findViewById(R.id.choice_two);
-        choicethree = (ImageButton) findViewById(R.id.choice_three);
+        choicethree = (ImageButton)findViewById(R.id.choice_three);
+        choicefour = (ImageButton)findViewById(R.id.choice_four);
+        choicefive = (ImageButton)findViewById(R.id.choice_five);
+        choicesix = (ImageButton)findViewById(R.id.choice_six);
+        choiceseven = (ImageButton)findViewById(R.id.choice_seven);
+        choiceeight = (ImageButton)findViewById(R.id.choice_eight);
+
+        turnoff = (ImageButton)findViewById(R.id.matrixoff);
+
         chamtxt = (TextView)findViewById(R.id.chameleon_title);
 
 
@@ -133,12 +146,63 @@ public class Chameleon extends Activity {
                 }
             });
 
+
             choicethree.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
                     if(mConnectedThread != null){ //First check to make sure thread created
-                       mConnectedThread.write(THREE);}
-                        Toast.makeText(getApplicationContext(),"choicethree",Toast.LENGTH_SHORT).show();
+                        mConnectedThread.write(THREE);}
+                    Toast.makeText(getApplicationContext(),"choicethree",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choicefour.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(FOUR);}
+                    Toast.makeText(getApplicationContext(),"choicefour",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choicefive.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(FIVE);}
+                    Toast.makeText(getApplicationContext(),"choicefive",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choicesix.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(SIX);}
+                    Toast.makeText(getApplicationContext(),"choicesix",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choiceseven.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(SEVEN);}
+                    Toast.makeText(getApplicationContext(),"choiceseven",Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
+            choiceeight.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    if(mConnectedThread != null){ //First check to make sure thread created
+                        mConnectedThread.write(EIGHT);}
+                    Toast.makeText(getApplicationContext(),"choiceeight",Toast.LENGTH_SHORT).show();
 
                 }
             });

@@ -11,4 +11,18 @@
     <item name="btn_cloud" type="id">btn_cloud</item>
     <item name="choice_two" type="id">choice two</item>
     <item name="choice_three" type="id">choice three</item>
+    <item name="btn_one" type="id">cloudone</item>
+    <item name="btn_two" type="id">cloudtwo</item>
+    <item name="btn_three" type="id">cloudthree</item>
+    <item name="btn_four" type="id">cloudfour</item>
+    <item name="btn_five" type="id">cloudfive</item>
+    <item name="btn_six" type="id">cloudsix</item>
+    <item name="btn_seven" type="id">cloudseven</item>
+    <item name="btn_eight" type="id">cloudeight</item>
+    <item name="choice_four" type="id">choice four</item>
+    <item name="choice_five" type="id">choice five</item>
+    <item name="choice_six" type="id">choice six</item>
+    <item name="choice_seven" type="id">choice seven</item>
+    <item name="choice_eight" type="id">choice eight</item>
+    <item name="btn_cloud_off" type="id">cloudoff button</item>
 </resources>

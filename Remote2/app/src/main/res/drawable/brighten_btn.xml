@@ -2,54 +2,30 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
-    <layer-list>
-        <item android:height="30dp"
-            android:width = "30dp">
-        <shape android:shape="oval">
+        <shape
+            android:shape = "oval"
+            android:height="60dp"
+            android:width = "60dp">
+
             <solid android:color="@color/switchtrackdisable" />
         </shape>
-        </item>
-        <item
-            android:start="1dp"
-            android:width="28dp"
-            android:height="28dp">
-            <bitmap android:src="@drawable/ic_bright7"
-                android:color = "@color/icon_color"/>
-        </item>
-        </layer-list>
     </item>
     <item android:state_pressed="true">
-        <layer-list>
-            <item android:height="30dp"
-                android:width = "30dp">
-                <shape android:shape="oval">
-                    <solid android:color="@color/colorPrimaryDark" />
-                </shape>
-            </item>
-            <item
-                android:start="1dp"
-                android:width="28dp"
-                android:height="28dp">
-                <bitmap android:src="@drawable/ic_bright7"
-                    android:color = "@color/icon_color"/>
-            </item>
-        </layer-list>
+        <shape
+            android:height="60dp"
+            android:width = "60dp"
+            android:shape = "oval">
+            <solid android:color="@color/colorPrimaryDark" />
+        </shape>
     </item>
     <item>
-        <layer-list>
-            <item android:height="30dp"
-                android:width = "30dp">
-                <shape android:shape="oval">
-                    <solid android:color="@color/switchtrackdisable" />
-                </shape>
-            </item>
-            <item
-                android:start="1dp"
-                android:width="28dp"
-                android:height="28dp">
-                <bitmap android:src="@drawable/ic_bright7"
-                    android:color = "@color/icon_color"/>
-            </item>
-        </layer-list>
+        <shape
+            android:shape = "oval"
+            android:height="60dp"
+            android:width = "60dp">
+
+            <solid android:color="@color/switchtrackdisable" />
+        </shape>
     </item>
+
 </selector>

@@ -39,15 +39,15 @@
         android:textColor="@color/font_color"
         android:textSize="30sp" />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pBar"
         style="@style/SpinKitView.Large.ThreeBounce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="180dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="180dp"
+        android:layout_marginTop="100dp"
+        android:visibility="gone"
         app:SpinKit_Color="@color/colorPrimaryDark" />
 
     <GridLayout
@@ -56,61 +56,121 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnCount="2"
-        android:rowCount="2"
+        android:columnCount="3"
+        android:rowCount="3"
         android:layout_gravity="center_horizontal">
 
         <ImageButton
             android:contentDescription="@string/logo_choice"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/choice_one"
             android:background="@drawable/cloud_choicebtn"
             android:text = "@string/logo_txt"
-            android:src = "@drawable/ic_vbadgetiny48"
+            android:src = "@drawable/ic_numberone"
             android:layout_column="0"
             android:layout_row = "0" />
 
         <ImageButton
             android:contentDescription="@string/stars_choice"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/choice_two"
             android:background="@drawable/cloud_choicebtn"
-            android:src = "@drawable/ic_flare48"
+            android:src = "@drawable/ic_numbertwo"
             android:layout_column="1"
             android:layout_row="0"/>
 
         <ImageButton
             android:contentDescription = "@string/video_choice"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/choice_three"
             android:background="@drawable/cloud_choicebtn"
-            android:src = "@drawable/ic_film48"
+            android:src = "@drawable/ic_numberthree"
+            android:layout_column="2"
+            android:layout_row= "0" />
+
+        <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_four"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_numberfour"
             android:layout_column="0"
             android:layout_row= "1" />
 
         <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_five"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_numberfive"
+            android:layout_column="1"
+            android:layout_row= "1" />
+
+        <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_six"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_numbersix"
+            android:layout_column="2"
+            android:layout_row= "1" />
+
+        <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_seven"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_numberseven"
+            android:layout_column="0"
+            android:layout_row= "2" />
+
+        <ImageButton
+            android:contentDescription = "@string/video_choice"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/choice_eight"
+            android:background="@drawable/cloud_choicebtn"
+            android:src = "@drawable/ic_numbereight"
+            android:layout_column="1"
+            android:layout_row= "2" />
+
+        <ImageButton
             android:contentDescription="@string/off_button"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/cloud_choicebtn"
             android:src = "@drawable/ic_cancel48"
             android:id="@+id/matrixoff"
-            android:layout_column="1"
-            android:layout_row="1"/>
-
+            />
 
     </GridLayout>
+
+
 
 </LinearLayout>
 
