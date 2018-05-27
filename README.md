@@ -11,9 +11,11 @@ LEDControl
 - LED on/off switch - "ledon", "ledoff"
 - Brightness control buttons - "brighten","dim"
 - Cloud on/off switch - "cloudon","cloudoff"
+- New choices are "cloud1" - "cloud8"
 
 Chameleon
 - Button 0,0 = "choiceone"
 - Button 0,1 = "choicetwo"
 - Button 1,0 = "choicethree"
-- Button 1,1 = "choiceoff"
+... "choiceeight"
+- Cancel button = "choiceoff"
