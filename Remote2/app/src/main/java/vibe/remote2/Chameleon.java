@@ -239,11 +239,11 @@ public class Chameleon extends Activity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "..IN ON PAUSE..");
-       /* try {
+        try {
             mBTSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @Override
