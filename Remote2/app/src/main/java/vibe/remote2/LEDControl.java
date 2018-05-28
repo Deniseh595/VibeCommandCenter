@@ -134,11 +134,14 @@ public class LEDControl extends Activity {
                 if(msg.what == CONNECTING_STATUS){
                     if(msg.arg1 == 1){
                        // mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
+                        Toast.makeText(getApplicationContext(),"Connected",Toast.LENGTH_SHORT).show();
                         findViewById(R.id.pBar).setVisibility(View.GONE);
                     }
-                    else {}
-                    Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
-                    // mBluetoothStatus.setText("Connection Failed");
+                    else {
+                        Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
+                        // mBluetoothStatus.setText("Connection Failed");
+                    }
+
                     findViewById(R.id.pBar).setVisibility(View.GONE);
 
                 }
@@ -193,7 +196,7 @@ public class LEDControl extends Activity {
                             if (isChecked) {
                                 if(mConnectedThread != null){
                                 mConnectedThread.write(CLOUDONE);}
-                                Toast.makeText(getApplicationContext(),"cloudon",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),"cloudone",Toast.LENGTH_SHORT).show();
 
                             } else {
                                 if(mConnectedThread != null){
@@ -320,11 +323,11 @@ public class LEDControl extends Activity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "..IN ON PAUSE..");
-        try {
+       /* try {
             mBTSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -333,7 +336,8 @@ public class LEDControl extends Activity {
         super.onDestroy();
         // if (mConnectedThread !=null)     {
         //     mConnectedThread.cancel();  }
-       // bluetoothOff();
+       // bluetoothOff(); // add kill socket here?
+
     }
 
     private void bluetoothOn(){
