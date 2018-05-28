@@ -109,12 +109,15 @@ public class Chameleon extends Activity {
                 if(msg.what == CONNECTING_STATUS){
                     if(msg.arg1 == 1){
                         // mBluetoothStatus.setText("Connected to Device: " + (String)(msg.obj));
-                        findViewById(R.id.pBar).setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),"Connected",Toast.LENGTH_SHORT).show();
+                       // findViewById(R.id.pBar).setVisibility(View.GONE);
                     }
-                    else {}
-                    Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
-                    // mBluetoothStatus.setText("Connection Failed");
-                    findViewById(R.id.pBar).setVisibility(View.GONE);
+                    else {
+                        Toast.makeText(getApplicationContext(),"Connection Failed",Toast.LENGTH_SHORT).show();
+                        // mBluetoothStatus.setText("Connection Failed");
+                    }
+
+                   findViewById(R.id.pBar).setVisibility(View.GONE);
 
                 }
             }
@@ -227,6 +230,7 @@ public class Chameleon extends Activity {
         super.onResume();
         mBTAdapter = BluetoothAdapter.getDefaultAdapter();
         mBTAdapter.cancelDiscovery();
+        //findViewById(R.id.pBar).setVisibility(View.VISIBLE);
         bluetoothOn();
         connectDevice();
     }
@@ -235,11 +239,11 @@ public class Chameleon extends Activity {
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "..IN ON PAUSE..");
-        try {
+       /* try {
             mBTSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
